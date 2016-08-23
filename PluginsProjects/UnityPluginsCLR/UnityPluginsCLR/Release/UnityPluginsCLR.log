@@ -1,0 +1,8 @@
+﻿cl : 命令行 warning D9035: “clr:safe”选项已否决，并将在将来的版本中移除
+  Stdafx.cpp
+cl : 命令行 warning D9035: “clr:safe”选项已否决，并将在将来的版本中移除
+  AssemblyInfo.cpp
+  UnityPluginsCLR.cpp
+  正在生成代码...
+  UnityPluginsCLR.vcxproj -> E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsCLR\Release\UnityPluginsCLR.dll
+  UnityPluginsCLR.vcxproj -> E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsCLR\Release\UnityPluginsCLR.pdb (Full PDB)

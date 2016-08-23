@@ -1,0 +1,9 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  UnityPluginsNative.cpp
+    正在创建库 E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsNative\Release\UnityPluginsNative.lib 和对象 E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsNative\Release\UnityPluginsNative.exp
+  正在生成代码
+  All 2 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  UnityPluginsNative.vcxproj -> E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsNative\Release\UnityPluginsNative.dll
+  UnityPluginsNative.vcxproj -> E:\02__projects\20__UnityLibTest\Assets\PluginsProjects\UnityPluginsNative\Release\UnityPluginsNative.pdb (Full PDB)
