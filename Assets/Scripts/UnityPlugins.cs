@@ -42,7 +42,7 @@ UNITY_4_1	平台定义为主要版本的Unity 4.1。
 
 public class UnityPlugins : MonoBehaviour {
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
     [DllImport("UnityPluginsNative")]
     private extern static IntPtr UnityCallCppNativeAdd(int a, int b);
 #endif
@@ -52,7 +52,7 @@ public class UnityPlugins : MonoBehaviour {
     public static extern void UnityCallIOSPrint();
 #endif
 
-#if UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_OSX && !UNITY_EDITOR
     [DllImport("UnityPluginsMacOSX")]
     private static extern void UnityCallMacOSXPrint();
 #endif
@@ -110,6 +110,7 @@ public class UnityPlugins : MonoBehaviour {
 
             int sum = 0;
 
+            //返回两数相加的和
             sum = unityPluginsCLR.UnityCallCppCLRAdd(10, 20);
 
             gTextOne.text = sum.ToString();
@@ -129,11 +130,10 @@ public class UnityPlugins : MonoBehaviour {
     {
         Debug.Log("OnClickButtonCppNative");
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
         try
         {            
-            //string str = Marshal.PtrToStringUni(UnityCallCppNativeAdd(20, 30));
-
+            //这个原本是要做一个加法，后来调试返回字符串，现在返回一个helloworld
             string str = Marshal.PtrToStringAnsi(UnityCallCppNativeAdd(20, 30));
 
             gTextTwo.text = str;
@@ -154,6 +154,7 @@ public class UnityPlugins : MonoBehaviour {
 #if UNITY_ANDROID
         try
         {
+            //返回两数相加的和
             /* 调用静态方法 */
             //AndroidJavaClass unityPluginsAndroid = new AndroidJavaClass("com.example.mylibrary.UnityPluginsJava"); //这种用法是OK的
 
@@ -185,6 +186,7 @@ public class UnityPlugins : MonoBehaviour {
 #if UNITY_IPHONE || UNITY_IOS
         try
         {
+            //IOS的返回值比较麻烦，现在只知道调用成功，但是没有返回值，返回值部分还需要花时间研究
             UnityCallIOSPrint();
             gTextFor.text = "UnityCallIOSPrint OK";
         }
@@ -200,9 +202,10 @@ public class UnityPlugins : MonoBehaviour {
     {
         Debug.Log("OnClickButtonMacOSX");
 
-#if UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_OSX && !UNITY_EDITOR
         try
         {
+            //MacOSX的返回值现在也没有做好
             UnityCallMacOSXPrint();
             gTextFiv.text = "UnityCallMacOSXPrint OK";
         }
