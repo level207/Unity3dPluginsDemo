@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityPluginsCLR;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine.UI;
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+using UnityPluginsCLR;
+#endif
 
 /* 
 平台定义
@@ -39,7 +42,7 @@ UNITY_4_1	平台定义为主要版本的Unity 4.1。
 
 public class UnityPlugins : MonoBehaviour {
 
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE_WIN
     [DllImport("UnityPluginsNative")]
     private extern static IntPtr UnityCallCppNativeAdd(int a, int b);
 #endif
@@ -97,26 +100,29 @@ public class UnityPlugins : MonoBehaviour {
 
     public void OnClickButtonCppCLR()
     {
+        //CLR托管代码可以支持Standalone三个平台调用，且不需要DLLimport动态库
         Debug.Log("OnClickButtonCppCLR");
 
-        //try
-        //{
-        //    CLR4orUnity unityPluginsCLR = new CLR4orUnity();
+#if UNITY_STANDALONE || UNITY_EDITOR
+        try
+        {
+            CLR4orUnity unityPluginsCLR = new CLR4orUnity();
 
-        //    int sum = 0;
+            int sum = 0;
 
-        //    sum = unityPluginsCLR.UnityCallCppCLRAdd(10, 20);
+            sum = unityPluginsCLR.UnityCallCppCLRAdd(10, 20);
 
-        //    gTextOne.text = sum.ToString();
+            gTextOne.text = sum.ToString();
 
-        //    Debug.Log(sum);
+            Debug.Log(sum);
 
-        //}
-        //catch (Exception e)
-        //{
-        //    Debug.LogException(e);
-        //    return;
-        //}
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return;
+        }
+#endif
     }
 
     public void OnClickButtonCppNative()
@@ -145,7 +151,7 @@ public class UnityPlugins : MonoBehaviour {
     {
         Debug.Log("OnClickButtonAndroid");
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
         try
         {
             /* 调用静态方法 */
@@ -176,7 +182,7 @@ public class UnityPlugins : MonoBehaviour {
     {
         Debug.Log("OnClickButtonIOS");
 
-#if UNITY_IPHONE || UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IPHONE || UNITY_IOS
         try
         {
             UnityCallIOSPrint();
